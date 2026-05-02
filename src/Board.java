@@ -56,4 +56,22 @@ public class Board {
     public void clearCell(Position pos) {
         grid[pos.row][pos.col] = null;
     }
+
+    // Returns all legal moves for a piece at pos (filters moves leaving own king in
+    // check)
+    public List<Position> getLegalMoves(Position pos) {
+        Piece piece = getPiece(pos);
+        if (piece == null)
+            return List.of();
+
+        List<Position> raw = getRawMoves(pos, piece);
+        List<Position> legal = new ArrayList<>();
+        for (Position to : raw) {
+            if (!moveLeavesKingInCheck(pos, to, piece.getColor())) {
+                legal.add(to);
+            }
+        }
+        return legal;
+    }
+
 }
