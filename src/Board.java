@@ -117,4 +117,40 @@ public class Board {
         return moves;
     }
 
+    private List<Position> getQueenMoves(Position pos, PieceColor color) {
+        List<Position> moves = new ArrayList<>();
+        int[][] dirs = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
+        for (int[] d : dirs) {
+            int r = pos.row + d[0], c = pos.col + d[1];
+            while (r >= 0 && r < 6 && c >= 0 && c < 6) {
+                Position to = new Position(r, c);
+                if (isFriendly(to, color))
+                    break;
+                moves.add(to);
+                if (isEnemy(to, color))
+                    break;
+                r += d[0];
+                c += d[1];
+            }
+        }
+        return moves;
+    }
+
+    private List<Position> getPawnMoves(Position pos, PieceColor color) {
+        List<Position> moves = new ArrayList<>();
+        int dir = (color == PieceColor.WHITE) ? -1 : 1; // white moves up, black moves down
+
+        // Forward step
+        Position fwd = new Position(pos.row + dir, pos.col);
+        if (fwd.isValid() && getPiece(fwd) == null) {
+            moves.add(fwd);
+            // Double step from starting row
+            int startRow = (color == PieceColor.WHITE) ? 4 : 1;
+            if (pos.row == startRow) {
+                Position dbl = new Position(pos.row + 2 * dir, pos.col);
+                if (dbl.isValid() && getPiece(dbl) == null) moves.add(dbl);
+            }
+        }
+
+
 }
