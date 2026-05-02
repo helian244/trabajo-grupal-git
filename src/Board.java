@@ -14,3 +14,13 @@ public class Board {
             for (int c = 0; c < 6; c++)
                 grid[r][c] = other.grid[r][c];
     }
+
+    private void setupInitialPosition() {
+        // Black pieces - row 0 (top)
+        grid[0][0] = new Piece(PieceType.ROOK,  PieceColor.BLACK);
+        grid[0][1] = new Piece(PieceType.QUEEN, PieceColor.BLACK);
+        grid[0][2] = new Piece(PieceType.KING,  PieceColor.BLACK);
+        grid[0][3] = null;
+        grid[0][4] = new Piece(PieceType.ROOK,  PieceColor.BLACK);
+        grid[0][5] = null;        
+    }
