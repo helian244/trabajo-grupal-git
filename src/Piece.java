@@ -16,4 +16,17 @@ public class Piece {
     public PieceColor getColor() {
         return color;
     }
+
+    public String getSymbol() {
+        if (color == PieceColor.WHITE) {
+            return switch (type) {
+                case KING -> "♔";
+                case QUEEN -> "♕";
+                case ROOK -> "♖";
+                case PAWN -> "♙";
+            };
+        }
+        return "?";
+    }
 }
+
