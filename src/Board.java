@@ -74,4 +74,14 @@ public class Board {
         return legal;
     }
 
+    // Raw moves without check filtering
+    private List<Position> getRawMoves(Position pos, Piece piece) {
+        return switch (piece.getType()) {
+            case KING -> getKingMoves(pos, piece.getColor());
+            case QUEEN -> getQueenMoves(pos, piece.getColor());
+            case ROOK -> getRookMoves(pos, piece.getColor());
+            case PAWN -> getPawnMoves(pos, piece.getColor());
+        };
+    }
+
 }
