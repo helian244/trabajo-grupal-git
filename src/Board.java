@@ -183,4 +183,43 @@ public class Board {
         return true;
     }
 
+    // Simulate move and check if own king is in check
+    private boolean moveLeavesKingInCheck(Position from, Position to, PieceColor color) {
+        Board sim = new Board(this);
+        sim.setPiece(to, sim.getPiece(from));
+        sim.clearCell(from);
+        return sim.isKingInCheck(color);
+    }
+
+    public boolean isKingInCheck(PieceColor color) {
+        Position kingPos = findKing(color);
+        if (kingPos == null)
+            return false;
+        return isSquareAttackedBy(kingPos, color.opposite());
+    }
+
+    public boolean isCheckmate(PieceColor color) {
+        if (!isKingInCheck(color))
+            return false;
+        return hasNoLegalMoves(color);
+    }
+
+    public boolean isStalemate(PieceColor color) {
+        if (isKingInCheck(color))
+            return false;
+        return hasNoLegalMoves(color);
+    }
+
+    private boolean hasNoLegalMoves(PieceColor color) {
+        for (int r = 0; r < 6; r++)
+            for (int c = 0; c < 6; c++) {
+                Piece p = grid[r][c];
+                if (p != null && p.getColor() == color) {
+                    if (!getLegalMoves(new Position(r, c)).isEmpty())
+                        return false;
+                }
+            }
+        return true;
+    }
+
 }
