@@ -1,4 +1,3 @@
-
 public class GameState {
     public enum Status {
         PLAYING, CHECK, CHECKMATE, STALEMATE
@@ -57,4 +56,32 @@ public class GameState {
         updateStatus();
         return true;
     }
+
+    private void updateStatus() {
+        if (board.isCheckmate(currentTurn)) {
+            status = Status.CHECKMATE;
+        } else if (board.isStalemate(currentTurn)) {
+            status = Status.STALEMATE;
+        } else if (board.isKingInCheck(currentTurn)) {
+            status = Status.CHECK;
+        } else {
+            status = Status.PLAYING;
+        }
+    }
+
+    public String getStatusMessage() {
+        return switch (status) {
+            case PLAYING -> (currentTurn == PieceColor.WHITE ? "Blancas" : "Negras") + " al turno";
+            case CHECK -> "¡JAQUE! — " + (currentTurn == PieceColor.WHITE ? "Blancas" : "Negras") + " deben escapar";
+            case CHECKMATE -> "JAQUE MATE — " + (currentTurn == PieceColor.WHITE ? "Negras" : "Blancas") + " ganan!";
+            case STALEMATE -> "TABLAS — Ahogado";
+        };
+    }
+
+    public PieceColor getWinner() {
+        if (status != Status.CHECKMATE)
+            return null;
+        return currentTurn.opposite();
+    }
+
 }
