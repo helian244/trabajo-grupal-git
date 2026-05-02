@@ -34,4 +34,7 @@ public class Board {
         grid[5][3] = new Piece(PieceType.QUEEN, PieceColor.WHITE);
         grid[5][4] = new Piece(PieceType.ROOK,  PieceColor.WHITE);
         grid[5][5] = null;
+        // White pawns - row 4
+        grid[4][0] = new Piece(PieceType.PAWN, PieceColor.WHITE);
+        grid[4][5] = new Piece(PieceType.PAWN, PieceColor.WHITE);
     }
