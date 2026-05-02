@@ -222,4 +222,41 @@ public class Board {
         return true;
     }
 
+    public boolean isSquareAttackedBy(Position target, PieceColor attacker) {
+        for (int r = 0; r < 6; r++)
+            for (int c = 0; c < 6; c++) {
+                Piece p = grid[r][c];
+                if (p != null && p.getColor() == attacker) {
+                    List<Position> raw = getRawMoves(new Position(r, c), p);
+                    if (raw.contains(target)) return true;
+                }
+            }
+        return false;
+    }
+
+    public Position findKing(PieceColor color) {
+        for (int r = 0; r < 6; r++)
+            for (int c = 0; c < 6; c++)
+                if (grid[r][c] != null
+                    && grid[r][c].getType() == PieceType.KING
+                    && grid[r][c].getColor() == color)
+                    return new Position(r, c);
+        return null;
+    }
+
+    // Check if a pawn reached the opposite end (for promotion)
+    public Position getPawnPromotion(PieceColor color) {
+        int row = (color == PieceColor.WHITE) ? 0 : 5;
+        for (int c = 0; c < 6; c++) {
+            Piece p = grid[row][c];
+            if (p != null && p.getType() == PieceType.PAWN && p.getColor() == color)
+                return new Position(row, c);
+        }
+        return null;
+    }
+
+    public void promotePawn(Position pos, PieceColor color) {
+        grid[pos.row][pos.col] = new Piece(PieceType.QUEEN, color);
+    }
+
 }
