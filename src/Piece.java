@@ -34,6 +34,12 @@ public class Piece {
             };
         }
     }
+
+    @Override
+    public String toString() {
+        return color + "_" + type;
+    }
 }
+
 
 
