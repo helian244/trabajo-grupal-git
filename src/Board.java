@@ -148,9 +148,39 @@ public class Board {
             int startRow = (color == PieceColor.WHITE) ? 4 : 1;
             if (pos.row == startRow) {
                 Position dbl = new Position(pos.row + 2 * dir, pos.col);
-                if (dbl.isValid() && getPiece(dbl) == null) moves.add(dbl);
+                if (dbl.isValid() && getPiece(dbl) == null)
+                    moves.add(dbl);
             }
         }
+        // Diagonal captures
+        for (int dc : new int[] { -1, 1 }) {
+            Position cap = new Position(pos.row + dir, pos.col + dc);
+            if (cap.isValid() && isEnemy(cap, color))
+                moves.add(cap);
+        }
+        return moves;
+    }
 
+    private boolean isFriendly(Position pos, PieceColor color) {
+        Piece p = getPiece(pos);
+        return p != null && p.getColor() == color;
+    }
+
+    private boolean isEnemy(Position pos, PieceColor color) {
+        Piece p = getPiece(pos);
+        return p != null && p.getColor() != color;
+    }
+
+    public boolean movePiece(Position from, Position to) {
+        Piece piece = getPiece(from);
+        if (piece == null)
+            return false;
+        List<Position> legal = getLegalMoves(from);
+        if (!legal.contains(to))
+            return false;
+        setPiece(to, piece);
+        clearCell(from);
+        return true;
+    }
 
 }
