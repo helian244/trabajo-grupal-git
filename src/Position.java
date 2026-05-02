@@ -28,4 +28,10 @@ public class Position {
         return Objects.hash(row, col);
     }
 
+    @Override
+    public String toString() {
+        char file = (char) ('a' + col);
+        int rank = 6 - row;
+        return "" + file + rank;
+    }
 }
