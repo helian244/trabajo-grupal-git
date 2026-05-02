@@ -25,8 +25,15 @@ public class Piece {
                 case ROOK -> "♖";
                 case PAWN -> "♙";
             };
+        } else {
+            return switch (type) {
+                case KING -> "♚";
+                case QUEEN -> "♛";
+                case ROOK -> "♜";
+                case PAWN -> "♟";
+            };
         }
-        return "?";
     }
 }
+
 
