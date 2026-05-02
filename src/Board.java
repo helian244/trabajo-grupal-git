@@ -26,4 +26,12 @@ public class Board {
         // Black pawns - row 1
         grid[1][0] = new Piece(PieceType.PAWN, PieceColor.BLACK);
         grid[1][5] = new Piece(PieceType.PAWN, PieceColor.BLACK); 
+
+        // White pieces - row 5 (bottom)
+        grid[5][0] = null;
+        grid[5][1] = new Piece(PieceType.ROOK,  PieceColor.WHITE);
+        grid[5][2] = new Piece(PieceType.KING,  PieceColor.WHITE);
+        grid[5][3] = new Piece(PieceType.QUEEN, PieceColor.WHITE);
+        grid[5][4] = new Piece(PieceType.ROOK,  PieceColor.WHITE);
+        grid[5][5] = null;
     }
