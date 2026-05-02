@@ -84,4 +84,37 @@ public class Board {
         };
     }
 
+    private List<Position> getKingMoves(Position pos, PieceColor color) {
+        List<Position> moves = new ArrayList<>();
+        int[] d = { -1, 0, 1 };
+        for (int dr : d)
+            for (int dc : d) {
+                if (dr == 0 && dc == 0)
+                    continue;
+                Position to = new Position(pos.row + dr, pos.col + dc);
+                if (to.isValid() && !isFriendly(to, color))
+                    moves.add(to);
+            }
+        return moves;
+    }
+
+    private List<Position> getRookMoves(Position pos, PieceColor color) {
+        List<Position> moves = new ArrayList<>();
+        int[][] dirs = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+        for (int[] d : dirs) {
+            int r = pos.row + d[0], c = pos.col + d[1];
+            while (r >= 0 && r < 6 && c >= 0 && c < 6) {
+                Position to = new Position(r, c);
+                if (isFriendly(to, color))
+                    break;
+                moves.add(to);
+                if (isEnemy(to, color))
+                    break;
+                r += d[0];
+                c += d[1];
+            }
+        }
+        return moves;
+    }
+
 }
