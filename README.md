@@ -12,7 +12,7 @@
 
 ## Equipo
 
-| Nombre | CI | Correo | Rol |
+| Nombre | Cel. | Correo | Rol |
 |---|---|---|---|
 | **Bryan Vasquez Maldonado** | 69512710 | bryan.vasquez.456@gmail.com | Lógica del tablero, motor de juego, interfaz gráfica |
 | **Roger Eric Saldivar Rojas** | 64883811 | rogerictober@gmail.com | Lógica del tablero, motor de juego, interfaz gráfica |
@@ -46,7 +46,7 @@
 
 ### Arquitectura del Proyecto
 
-El proyecto está compuesto por 7 clases Java, cada una con una responsabilidad clara:
+El proyecto está compuesto por 8 clases Java, cada una con una responsabilidad clara:
 
 ```
 src/
