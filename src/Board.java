@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.Position;
+
 
 public class Board {
     private final Piece[][] grid = new Piece[6][6];
@@ -228,7 +228,8 @@ public class Board {
                 Piece p = grid[r][c];
                 if (p != null && p.getColor() == attacker) {
                     List<Position> raw = getRawMoves(new Position(r, c), p);
-                    if (raw.contains(target)) return true;
+                    if (raw.contains(target))
+                        return true;
                 }
             }
         return false;
@@ -238,8 +239,8 @@ public class Board {
         for (int r = 0; r < 6; r++)
             for (int c = 0; c < 6; c++)
                 if (grid[r][c] != null
-                    && grid[r][c].getType() == PieceType.KING
-                    && grid[r][c].getColor() == color)
+                        && grid[r][c].getType() == PieceType.KING
+                        && grid[r][c].getColor() == color)
                     return new Position(r, c);
         return null;
     }
